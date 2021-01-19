@@ -1,6 +1,6 @@
 import Item from '../item';
 
-function Items(props) {
+function Items() {
     return (
         <div>
             <Item/>
