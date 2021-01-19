@@ -1,4 +1,5 @@
 import Item from '../item';
+import Button from '../../shared/uibuttons';
 
 function Items() {
     return (
@@ -9,8 +10,9 @@ function Items() {
             <Item/>
             <Item/>
             <Item/>
+            <Button>LISÄÄ UUSI RIVI</Button>
         </div>
-    )
+    );
 }
 
 export default Items;
