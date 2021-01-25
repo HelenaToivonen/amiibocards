@@ -22,13 +22,13 @@ const useForm = (callback, initialState={}, resetOnSubmit=true) => {
         event.persist();
         // Tallennetaan kenttään syötetty arvo välimuuttujaan.
         let value = event.target.value;
-        //Tallennetaan uusi arvi state-muuttujaan.
-        setValues(values => ({...values, [event.target.name]:}));
+        //Tallennetaan uusi arvo state-muuttujaan.
+        setValues(values => ({...values, [event.target.name]: value}));
 
     }
 
     // Funktio, joka palauttaa lomakkeen tiedot alkutilanteeseen.
-    const reserValues = () {
+    const resetValues = () => {
         setValues(initialState);
     }
 
