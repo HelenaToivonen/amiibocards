@@ -1,5 +1,6 @@
 import styles from './item.module.scss';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
+import { Link } from 'react-router-dom';
 
 function Item(props) {
 
@@ -30,7 +31,7 @@ function Item(props) {
                 <div className={styles.item_average}>{ average ? average + "/kk" : ""}</div>
             </div>
             <div className={styles.item_edit}>
-                <NavigateNextIcon />
+                <Link to={"/edit/"+props.data.id}> <NavigateNextIcon /></Link>
             </div>
         </div>
     );
