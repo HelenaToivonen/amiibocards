@@ -1,24 +1,53 @@
 @import '../../assets/styles/config.scss';
 
+
 .settings {
     padding: $container-padding;
+    color: #0d5c55;
+}
+.settings h2 {
+    color: #f598a4;
 }
 
 .settings h3 {
     margin-top: 0.5rem;
+    color: #0d5c55;
 }
 
-.settings_types {
+.settings_profile {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.settings_user {
+    display: flex;
+    align-items: center;
+}
+
+.settings_user img {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    margin: 1rem;
+}
+
+.settings_species, .settings_series {
+    display: inline;
     padding: 0.5rem;
     font-size: 1.1rem;
 }
 
-.settings_types > div {
+.settings_species, .settings_series > div {
     padding: 0.3rem;
     border-radius: 0.2rem;
 }
 
-.settings_types > div:nth-child(odd) {
+.settings_species > div:nth-child(odd) {
+    background-color: rgba(0,0,0,0.1);
+}
+
+.settings_series > div:nth-child(odd) {
     background-color: rgba(0,0,0,0.1);
 }
 
@@ -34,4 +63,7 @@
     border-radius: $form-input-radius;
     font-size: 1em;
     outline: none;
+    background-color: rgba(255, 255, 255, 0.418);
+    caret-color: blueviolet;
+    color: #0d5c55;
 }

@@ -11,8 +11,8 @@ function EditItem(props) {
 
     return(
         <div className={styles.edititem}>
-            <h2>Merkinnän muokkaaminen</h2>
-            <ItemForm onItemSubmit={props.onItemSubmit} data={item} types={props.types} onItemDelete={props.onItemDelete}/>
+            <h2>Edit</h2>
+            <ItemForm onItemSubmit={props.onItemSubmit} data={item} species={props.species} series={props.series} onItemDelete={props.onItemDelete}/>
         </div>
     );
 }

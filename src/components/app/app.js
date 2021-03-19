@@ -1,57 +1,80 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { useFirestore, useFirestoreCollectionData, useUser } from 'reactfire';
+import 'firebase/firestore';
+import 'firebase/auth';
 import styles from'./app.module.scss';
 import Header from '../header';
 import Content from '../content';
 import Items from '../../routes/items';
-import Stats from '../../routes/stats';
 import Settings from '../../routes/settings';
 import AddItem from '../../routes/additem';
 import EditItem from '../../routes/edititem';
 import Menu from '../menu';
 import { ButtonAppContainer } from '../../shared/uibuttons';
-import testdata from '../../testdata.js';
+//simport testdata from '../../testdata.js';
 
 function App() {
 
   const [data, setData] = useState([]);
-  const [typelist, setTypelist] = useState([]);
+  const [specielist, setSpecielist] = useState([]);
+  const [serielist, setSerielist] = useState([]);
+
+  const user = useUser();
+
+  const itemCollectionRef = useFirestore().collection('user').doc(user.data.uid).collection('item');
+  const { data: itemCollection } = useFirestoreCollectionData(itemCollectionRef, {initialData : [], idField: "id"});
+
+  
+  const serieCollectionRef = useFirestore().collection('user').doc(user.data.uid).collection('serie');
+  const { data: serieCollection } = useFirestoreCollectionData(serieCollectionRef.orderBy("serie"), { initialData: []});
+
+  const specieCollectionRef = useFirestore().collection('user').doc(user.data.uid).collection('specie');
+  const { data: specieCollection } = useFirestoreCollectionData(specieCollectionRef.orderBy("specie"), { initialData: []});
+
+ 
 
   useEffect(() => {
-    setData(testdata);
-    setTypelist(["Auto", "Puhelin", "Sähkö", "Vero", "Vesi"]);
+    setData(itemCollection);
+  }, [itemCollection]);
+
+  useEffect(() => {
+    const species = specieCollection.map(obj => obj.specie);
+    setSpecielist(species);
+  }, [specieCollection]); 
+ 
+  useEffect(() => {
+    //setData(testdata);
+    setSerielist(["Series 1", "Series 2", "Series 3", "Series 4", "amiibo Festival"]);
   }, []);
 
+  useEffect(() => {
+    const series = serieCollection.map(obj => obj.serie);
+    setSerielist(series);
+  }, [serieCollection]); 
+
   const handleItemSubmit = (newitem) => {
-    let storeddata = data.slice();
-    const index = storeddata.findIndex(item => item.id === newitem.id);
-    if (index >= 0 ) {
-      storeddata[index] = newitem;
-    } else {
-      storeddata.push(newitem);
-    }
 
-    storeddata.sort( (a,b) => {
-        const aDate = new Date(a.paymentDate);
-        const bDate = new Date(b.paymentDate);
-        return bDate.getTime() - aDate.getTime();
-    } );
+      itemCollectionRef.doc(newitem.id).set(newitem);
 
-    setData(storeddata);
   }
 
   const handleItemDelete = (id) => {
-    let storeddata = data.slice();
-    storeddata = storeddata.filter(item => item.id !== id);
-    setData(storeddata);
+
+    itemCollectionRef.doc(id).delete();
+
   }
 
-  const handleTypeSubmit = (newtype) => {
-    let storedtypelist = typelist.slice();
-    storedtypelist.push(newtype);
-    storedtypelist.sort();
-    setTypelist(storedtypelist);
+ const handleSpecieSubmit = (newspecie) => {
     
+  specieCollectionRef.doc().set({specie: newspecie});
+
+  }
+
+  const handleSerieSubmit = (newserie) => {
+
+    serieCollectionRef.doc().set({serie: newserie});
+
   }
 
   return (
@@ -63,17 +86,27 @@ function App() {
             <Route exact path="/">
             <Items data={data} />
             </Route>
-            <Route path="/stats">
-              <Stats/>
-            </Route>
             <Route path="/settings">
-              <Settings types={typelist} onTypeSubmit={handleTypeSubmit} />
+              <Settings 
+                 species={specielist} 
+                 onSpecieSubmit={handleSpecieSubmit}
+                 series={serielist}
+                 onSerieSubmit={handleSerieSubmit}
+                
+                />
             </Route>
             <Route path="/add">
-              <AddItem onItemSubmit={handleItemSubmit} types={typelist} />
+              <AddItem 
+                   onItemSubmit={handleItemSubmit} 
+                   species={specielist}
+                   series={serielist}
+                   />
             </Route>
             <Route path="/edit/:id">
-              <EditItem onItemSubmit={handleItemSubmit} data={data} types={typelist} onItemDelete={handleItemDelete} />
+              <EditItem 
+                 onItemSubmit={handleItemSubmit} 
+                 data={data} species={specielist} series={serielist}
+                 onItemDelete={handleItemDelete} />
             </Route>
           </Content>
         <Menu/>

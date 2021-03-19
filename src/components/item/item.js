@@ -1,34 +1,18 @@
 import styles from './item.module.scss';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
+import CakeIcon from '@material-ui/icons/Cake';
 import { Link } from 'react-router-dom';
 
 function Item(props) {
 
-    const locale = "fi-FI";
-    const paymentDate = new Date(props.data.paymentDate).toLocaleDateString(locale);
-    const numberFormat = new Intl.NumberFormat(locale, { style: 'currency', currency: 'EUR'});
-    const amount = numberFormat.format(props.data.amount);
-
-    let average;
-    let period;
-    if(props.data.periodStart && props.data.periodEnd) {
-        const periodStart = new Date(props.data.periodStart);
-        const periodEnd = new Date(props.data.periodEnd);
-        period = periodStart.toLocaleDateString(locale) + " - " + periodEnd.toLocaleDateString(locale);
-        const days = (periodEnd - periodStart) / (1000*60*60*24);
-        average = numberFormat.format(props.data.amount / days * 30);
-
-    }
-
     return (
         <div className={styles.item}>
             <div className={styles.item_data}>
-                <div className={styles.item_type}>{props.data.type}</div>
-                <div className={styles.item_amount}>{amount}</div>
-                <div className={styles.item_date}>{paymentDate}</div>
-                <div className={styles.item_timespan}>{period}</div>
-                <div className={styles.item_receiver}>{props.data.receiver}</div>
-                <div className={styles.item_average}>{ average ? average + "/kk" : ""}</div>
+                <div className={styles.item_fname}>{props.data.fname}</div>
+                <div className={styles.item_species}>{props.data.specie}</div>
+                <div className={styles.item_birthday}><CakeIcon/> {props.data.birthday}</div>
+                <div className={styles.item_personality}>{props.data.personality}</div>
+                <div className={styles.item_series}>{props.data.serie}</div>  
             </div>
             <div className={styles.item_edit}>
                 <Link to={"/edit/"+props.data.id}> <NavigateNextIcon /></Link>

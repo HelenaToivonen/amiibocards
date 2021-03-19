@@ -1,15 +1,53 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Crete+Round&display=swap');
+
+
+body {
+
+    background-image: url("ac-wallpaper.png");
+    background-repeat: repeat;
+    background-position: left top;
+    background-size: 400px;
+      /*  background: linear-gradient(
+        to right bottom,
+         rgba(24, 200, 184, 0.3),
+         rgba(146, 215, 225, 0.7)
+        
+        );*/
+}
 
 .app {
-    font-family: 'Nunito', sans-serif;
+    font-family: 'Crete Round', serif;
     max-width: 38rem;
-    margin: 0 auto;
+    margin: 4rem auto;
 
     display: flex;
     flex-direction: column;
     height: 100vh;
+    
 }
 
 .app > * {
     flex: 1 1 auto;
 }
+
+.app {
+    
+    background: linear-gradient(
+        to right bottom,
+         rgba(24, 200, 184, 0.3),
+         rgba(146, 215, 225, 0.7)
+        
+         );
+/*background: linear-gradient(
+    to right bottom,
+        rgba(255, 255, 255, 0.3),
+        rgba(255, 255, 255, 0.7)
+
+        );*/     
+    box-shadow: rgba(0,0,0,0.3) 1px 3px 6px;
+    padding-top: 2rem;
+    border-radius: 2rem;
+    backdrop-filter: blur(5px);
+  
+}
+

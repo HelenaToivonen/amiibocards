@@ -11,20 +11,19 @@ function ItemForm(props) {
 
     const submit = () => {
         let storedvalues = Object.assign({}, values);
-        storedvalues.amount = parseFloat(storedvalues.amount);
         storedvalues.id = storedvalues.id ? storedvalues.id : uuidv4();
         props.onItemSubmit(storedvalues);
-        alert("SUBMIT");
         history.push("/");
     }
 
     const initialState = props.data ? props.data : {
-        type: "",
-        amount: 0,
-        paymentDate: "",
-        periodStart: "",
-        periodEnd: "",
-        receiver: ""
+
+        specie: props.species ? props.species[0] : "",
+        fname: "",
+        birthday: "",
+        personality: "",
+        serie: ""
+    
     };
 
 
@@ -47,56 +46,55 @@ function ItemForm(props) {
             <div className={styles.form}>
 
              <div className={styles.form_row}>
+             <div>
+                    <label htmlFor="fname">Name</label>
+                    <input type="text" name="fname" onChange={handleChange} value={values.fname} required />
+                 </div>
                  <div>
-                     <label htmlFor="type">Kulutyyppi</label>
-                     <select name="type" onChange={handleChange} value={values.type}>
-                        { props.types.map( (type) =>  <option key={type} value={type}>{type}</option> ) }
+                     <label htmlFor="serie">Series</label>
+                     <select name="serie" onChange={handleChange} value={values.series} required >
+                        { props.series.map( (serie) =>  <option key={serie} value={serie}>{serie} </option> ) }
                      </select>
                  </div>
               </div>   
 
               <div className={styles.form_row}>
-                 <div>
-                    <label htmlFor="amount">Summa</label>
-                    <input type="number" name="amount" step="0.01" onChange={handleChange} value={values.amount}/>
+              <div>
+                     <label htmlFor="specie">Species</label>
+                     <select name="specie" onChange={handleChange} value={values.species}>
+                        { props.species.map( (specie) =>  <option key={specie} value={specie}>{specie}</option> ) }
+                     </select>
                  </div>
-                 <div>
-                    <label htmlFor="paymentDate">Maksupäivä</label>
-                    <input type="date" name="paymentDate" onChange={handleChange} value={values.paymentDate}/>
-                 </div>
-                </div>    
 
+                 <div>
+                    <label htmlFor="birthday">Birthday</label>
+                    <input type="date" name="birthday" onChange={handleChange} value={values.birthday} required />
+                 </div>
+         
+
+                </div>
+                
               <div className={styles.form_row}>
                  <div>
-                    <label htmlFor="periodStart">Laskutuskauden alku</label>
-                    <input type="date" name="periodStart" onChange={handleChange} value={values.periodStart} />
-                 </div>
-                 <div>
-                    <label htmlFor="periodEnd">Laskutuskauden loppu</label>
-                    <input type="date" name="periodEnd" onChange={handleChange} value={values.periodEnd} />
+                    <label htmlFor="personality">Personality</label>
+                    <input type="text" name="personality" onChange={handleChange} value={values.personality} required />
                  </div>
                 </div>
-
-                <div className={styles.form_row}>
-                 <div>
-                    <label htmlFor="receiver">Saaja</label>
-                    <input type="text" name="receiver" onChange={handleChange} value={values.receiver} />
-                 </div>
-                </div> 
+               
 
                  <div className={styles.form_row}>
                     <div>
-                        <Button onClick={handleCancel}>PERUUTA</Button>
+                        <Button onClick={handleCancel}>CANCEL</Button>
                     </div>
                  <div>
-                    <Button primary type="submit">{ props.data ? "TALLENNA" : "LISÄÄ" }</Button>
+                    <Button primary type="submit">{ props.data ? "SAVE" : "ADD" }</Button>
                  </div>
                 </div>
 
                 { props.onItemDelete ?
                   <div className={styles.form_row}>
                       <div>
-                          <Button onClick={handleDelete}>POISTA</Button>
+                          <Button onClick={handleDelete}>DELETE</Button>
                       </div>                
                       <div></div>
                      </div> : "" }

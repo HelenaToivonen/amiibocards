@@ -22,9 +22,14 @@
     border-radius: $form-input-radius;
     font-size: $form-input-fontsize;
     outline: none;
+    background-color: rgba(255, 255, 255, 0.418);
+    caret-color: blueviolet;
+    color: #0d5c55;
 }
 
 .form label {
     font-size: $form-label-fontsize;
     margin-bottom: $form-label-margin-bottom;
+    color: #0d5c55;
+    //text-shadow: 1px 0px 1px rgb(255, 255, 255);
 }

@@ -1,0 +1,38 @@
+.startup {
+    max-width: 38rem;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5rem;
+    background: linear-gradient(
+        to right bottom,
+         rgba(255, 255, 255, 0.3),
+         rgba(255, 255, 255, 0.7)
+        
+         );
+    backdrop-filter: blur(5px);
+    border-radius: 2rem;
+    box-shadow: rgba(0,0,0,0.3) 1px 3px 6px;
+
+}
+
+.startup div {
+    color :  rgb(24, 200, 184);
+    font-size: 1.5rem;
+    margin: 1rem;
+    padding: 4rem;
+    border-radius: 2rem;   
+}
+
+.startup h1 {
+    font-size: 3rem;
+    color: #f7c63a;
+    text-shadow: 4px 0px 0px rgb(129, 94, 38);
+    padding: 1rem;
+}
+
+.startup button {
+    margin-bottom: 3rem;
+}

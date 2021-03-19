@@ -1,7 +1,7 @@
 @import '../../assets/styles/_config.scss';
 
 .menu{
-    background-color: $menu-background;
+    //background-color: $menu-background;
     color: $menu-text;
     max-height: $menu-height;
     min-height: $menu-height;
@@ -12,4 +12,8 @@
 
 .menu a {
     color: $menu-text;
+}
+
+.menu a:hover {
+    color: rgba(0, 0, 0, 0.219);
 }
